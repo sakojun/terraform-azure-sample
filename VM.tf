@@ -1,6 +1,6 @@
 # Create public IPs
 resource "azurerm_public_ip" "myterraformpublicip" {
-  name                = local.public_ip_name
+  name                = var.public_ip_name
   location            = var.location
   resource_group_name = azurerm_resource_group.myterraformgroup.name
   allocation_method   = var.public_ip_allocation_method
@@ -12,7 +12,7 @@ resource "azurerm_public_ip" "myterraformpublicip" {
 
 # Create Network Security Group and rule
 resource "azurerm_network_security_group" "myterraformnsg" {
-  name                = local.network_security_group_name
+  name                = var.network_security_group_name
   location            = var.location
   resource_group_name = azurerm_resource_group.myterraformgroup.name
 
@@ -36,7 +36,7 @@ resource "azurerm_network_security_group" "myterraformnsg" {
 
 # Create network interface
 resource "azurerm_network_interface" "myterraformnic" {
-  name                = local.network_interface_name
+  name                = var.network_interface_name
   location            = var.location
   resource_group_name = azurerm_resource_group.myterraformgroup.name
 
@@ -92,7 +92,7 @@ output "tls_private_key" { value = "${tls_private_key.example_ssh.private_key_pe
 
 # Create virtual machine
 resource "azurerm_linux_virtual_machine" "myterraformvm" {
-  name                  = local.linux_virtual_machine_name
+  name                  = var.linux_virtual_machine_name
   location              = var.location
   resource_group_name   = azurerm_resource_group.myterraformgroup.name
   network_interface_ids = [azurerm_network_interface.myterraformnic.id]
@@ -114,7 +114,7 @@ resource "azurerm_linux_virtual_machine" "myterraformvm" {
   }
 
 
-  computer_name                   = local.linux_virtual_machine_name
+  computer_name                   = var.linux_virtual_machine_name
   admin_username                  = var.linux_virtual_machine_admin_username
   disable_password_authentication = true
 
