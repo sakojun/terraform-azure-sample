@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "myterraformgroup" {
-  name     = local.rg_name
+  name     = var.rg_name
   location = var.location
 
   tags = {
